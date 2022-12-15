@@ -16,3 +16,9 @@ def books():
 def delete_book(id):
     book_repository.delete(id)
     return redirect('/books')
+
+@books_blueprint.route("books/<id>/edit", method = ['GET'])
+def update_book(id):
+    book = book_repository.select(id)
+    authors = author_repository.select_all()
+    return render_template('books/edit.html', book = book, all_athors = authors)
